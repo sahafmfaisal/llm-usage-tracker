@@ -29,9 +29,22 @@ A minimal browser extension that tracks message count, estimated token usage, an
 
 ### Safari
 
-1. Use **Safari Web Extension Converter** on the `extension/` folder.
+1. Run Safari's converter on the extension folder:
+   ```bash
+   xcrun safari-web-extension-converter /path/to/llm-usage-tracker/extension
+   ```
 2. Open the generated Xcode project.
-3. Build and run the Safari extension target.
+3. In Xcode, configure **Signing & Capabilities** for the app and extension targets (select your Apple Team).
+4. Build and run the app target from Xcode.
+5. Enable the extension in Safari:
+   - Safari → **Settings** → **Extensions** → enable **TokenPulse**.
+6. Open a supported site (`chatgpt.com` or `claude.ai`) and click the extension icon to verify popup stats are updating.
+
+#### Safari troubleshooting
+
+- If the extension does not appear, ensure Safari Developer mode is enabled and the app was run at least once from Xcode.
+- If stats do not update, refresh the active tab after enabling the extension.
+- If signing fails, re-check Team selection and bundle identifiers in Xcode.
 
 ## How it works
 
