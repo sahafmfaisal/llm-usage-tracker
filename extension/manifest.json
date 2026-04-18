@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "LLM Usage Tracker",
+  "version": "1.0.0",
+  "description": "Track message, token, and estimated cost analytics on ChatGPT and Claude.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://claude.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://claude.ai/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "LLM Usage Tracker",
+    "default_popup": "src/ui/popup.html"
+  }
+}
