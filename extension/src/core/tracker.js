@@ -16,6 +16,7 @@ export class UsageTracker {
   constructor({ storage = new TrackerStorage(), estimator = new UsageEstimator() } = {}) {
     this.storage = storage;
     this.estimator = estimator;
+    this._queue = Promise.resolve();
   }
 
   resolvePrice(state, platform) {
@@ -43,7 +44,15 @@ export class UsageTracker {
     return state.sessions[platform];
   }
 
-  async recordUsage(event) {
+  recordUsage(event) {
+    const next = this._queue.then(() => this._doRecordUsage(event));
+    this._queue = next.catch((err) => {
+      console.error("[llm-usage-tracker] recordUsage error:", err);
+    });
+    return next;
+  }
+
+  async _doRecordUsage(event) {
     const platform = normalizePlatform(event.platform);
     if (!["chatgpt", "claude"].includes(platform)) {
       return null;
