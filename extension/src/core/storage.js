@@ -75,6 +75,16 @@ function getStorageArea() {
   throw new Error("No extension storage API available.");
 }
 
+function coerceNumericFields(base, incoming) {
+  return {
+    ...base,
+    ...incoming,
+    messages: Number(incoming.messages) || 0,
+    tokens: Number(incoming.tokens) || 0,
+    cost: Number(incoming.cost) || 0
+  };
+}
+
 function mergeState(baseState, storedState = {}) {
   const merged = cloneDefaultState();
   const input = storedState || {};
@@ -86,17 +96,17 @@ function mergeState(baseState, storedState = {}) {
   };
 
   for (const scope of ["total"]) {
-    merged.lifetime[scope] = {
-      ...merged.lifetime[scope],
-      ...(input.lifetime?.[scope] || {})
-    };
+    merged.lifetime[scope] = coerceNumericFields(
+      merged.lifetime[scope],
+      input.lifetime?.[scope] || {}
+    );
   }
 
   for (const platform of Object.keys(merged.lifetime.platforms)) {
-    merged.lifetime.platforms[platform] = {
-      ...merged.lifetime.platforms[platform],
-      ...(input.lifetime?.platforms?.[platform] || {})
-    };
+    merged.lifetime.platforms[platform] = coerceNumericFields(
+      merged.lifetime.platforms[platform],
+      input.lifetime?.platforms?.[platform] || {}
+    );
   }
 
   for (const platform of Object.keys(merged.sessions)) {

@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "LLM Usage Tracker",
+  "name": "TokenPulse",
   "version": "1.0.0",
   "description": "Track message, token, and estimated cost analytics on ChatGPT and Claude.",
   "permissions": ["storage"],
   "host_permissions": [
+    "https://chatgpt.com/*",
     "https://chat.openai.com/*",
     "https://claude.ai/*"
   ],
@@ -15,6 +16,7 @@
   "content_scripts": [
     {
       "matches": [
+        "https://chatgpt.com/*",
         "https://chat.openai.com/*",
         "https://claude.ai/*"
       ],
@@ -23,7 +25,7 @@
     }
   ],
   "action": {
-    "default_title": "LLM Usage Tracker",
+    "default_title": "TokenPulse",
     "default_popup": "src/ui/popup.html"
   }
 }

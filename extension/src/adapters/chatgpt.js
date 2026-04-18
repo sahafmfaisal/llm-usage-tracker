@@ -58,11 +58,24 @@ export function createChatGPTAdapter({ onMessage }) {
     }
   }
 
+  let scanScheduled = false;
+
+  function scheduleScan() {
+    if (scanScheduled) {
+      return;
+    }
+    scanScheduled = true;
+    setTimeout(() => {
+      scanScheduled = false;
+      scan();
+    }, 250);
+  }
+
   function start() {
     scan();
 
     observer = new MutationObserver(() => {
-      scan();
+      scheduleScan();
     });
 
     observer.observe(document.body, {

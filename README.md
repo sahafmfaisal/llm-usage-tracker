@@ -1,8 +1,6 @@
-# Tokenpulse
+# TokenPulse
 
 A minimal browser extension that tracks message count, estimated token usage, and cost analytics across LLM web apps (ChatGPT + Claude).
-
-![Tokenpulse screenshot](./screenshot.png)
 
 ## Features
 
@@ -16,6 +14,7 @@ A minimal browser extension that tracks message count, estimated token usage, an
 
 ## Supported platforms
 
+- `https://chatgpt.com/*`
 - `https://chat.openai.com/*`
 - `https://claude.ai/*`
 
