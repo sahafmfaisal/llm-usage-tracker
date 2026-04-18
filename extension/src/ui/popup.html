@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM Usage Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <header>
+        <h1>LLM Usage Tracker</h1>
+      </header>
+
+      <section class="totals card">
+        <h2>Lifetime Total</h2>
+        <div class="metric-row"><span>Messages</span><strong id="totalMessages">0</strong></div>
+        <div class="metric-row"><span>Tokens</span><strong id="totalTokens">0</strong></div>
+        <div class="metric-row"><span>Estimated Cost</span><strong id="totalCost">$0.0000</strong></div>
+      </section>
+
+      <section class="sessions card">
+        <h2>Current Sessions</h2>
+        <div class="platform-grid">
+          <article>
+            <h3>ChatGPT</h3>
+            <p id="chatgptSession">No active session</p>
+          </article>
+          <article>
+            <h3>Claude</h3>
+            <p id="claudeSession">No active session</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="platforms card">
+        <h2>Platform Breakdown</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Messages</th>
+              <th>Tokens</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody id="platformRows"></tbody>
+        </table>
+      </section>
+
+      <footer>
+        <button id="resetButton" type="button">Reset Analytics</button>
+      </footer>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
