@@ -24,7 +24,7 @@
   }
 
   async function loadAdapter() {
-    if (host === "chat.openai.com") {
+    if (host === "chat.openai.com" || host === "chatgpt.com") {
       const module = await import(getExtensionUrl("src/adapters/chatgpt.js"));
       return module.createChatGPTAdapter({ onMessage: notifyUsage });
     }
@@ -71,7 +71,7 @@
   }
 
   initializeAdapter().catch((err) => {
-    console.error("[llm-usage-tracker] Failed to initialize adapter:", err);
+    console.error("[tokenpulse] Failed to initialize adapter:", err);
   });
   patchHistory();
 })();

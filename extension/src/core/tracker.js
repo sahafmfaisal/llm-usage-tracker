@@ -47,7 +47,7 @@ export class UsageTracker {
   recordUsage(event) {
     const next = this._queue.then(() => this._doRecordUsage(event));
     this._queue = next.catch((err) => {
-      console.error("[llm-usage-tracker] recordUsage error:", err);
+      console.error("[tokenpulse] recordUsage error:", err);
     });
     return next;
   }
