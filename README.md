@@ -1,8 +1,6 @@
-# Tokenpulse
+# TokenPulse
 
 A minimal browser extension that tracks message count, estimated token usage, and cost analytics across LLM web apps (ChatGPT + Claude).
-
-![Tokenpulse screenshot](./screenshot.png)
 
 ## Features
 
@@ -16,6 +14,7 @@ A minimal browser extension that tracks message count, estimated token usage, an
 
 ## Supported platforms
 
+- `https://chatgpt.com/*`
 - `https://chat.openai.com/*`
 - `https://claude.ai/*`
 
@@ -30,16 +29,16 @@ A minimal browser extension that tracks message count, estimated token usage, an
 
 ### Safari
 
-1. Run Safari’s converter on the extension folder:
+1. Run Safari's converter on the extension folder:
    ```bash
-   xcrun safari-web-extension-converter /workspace/llm-usage-tracker/extension
+   xcrun safari-web-extension-converter /path/to/llm-usage-tracker/extension
    ```
 2. Open the generated Xcode project.
 3. In Xcode, configure **Signing & Capabilities** for the app and extension targets (select your Apple Team).
 4. Build and run the app target from Xcode.
 5. Enable the extension in Safari:
-   - Safari → **Settings** → **Extensions** → enable **Tokenpulse**.
-6. Open a supported site (`chat.openai.com` or `claude.ai`) and click the extension icon to verify popup stats are updating.
+   - Safari → **Settings** → **Extensions** → enable **TokenPulse**.
+6. Open a supported site (`chatgpt.com` or `claude.ai`) and click the extension icon to verify popup stats are updating.
 
 #### Safari troubleshooting
 

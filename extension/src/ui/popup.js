@@ -1,17 +1,11 @@
-function getRuntime() {
-  return globalThis.browser?.runtime || globalThis.chrome?.runtime;
-}
-
 function sendMessage(message) {
-  const runtime = getRuntime();
-
-  if (runtime.sendMessage.length <= 1) {
-    return runtime.sendMessage(message);
+  if (globalThis.browser?.runtime) {
+    return globalThis.browser.runtime.sendMessage(message);
   }
 
   return new Promise((resolve, reject) => {
-    runtime.sendMessage(message, (response) => {
-      const error = chrome.runtime?.lastError;
+    globalThis.chrome.runtime.sendMessage(message, (response) => {
+      const error = globalThis.chrome?.runtime?.lastError;
       if (error) {
         reject(error);
         return;

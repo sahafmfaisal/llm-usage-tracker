@@ -1,7 +1,6 @@
 (function bootstrapContentScript() {
   const host = location.hostname;
   let adapter = null;
-  let adapterKey = null;
 
   function getRuntime() {
     return globalThis.browser?.runtime || globalThis.chrome?.runtime;
@@ -25,15 +24,13 @@
   }
 
   async function loadAdapter() {
-    if (host === "chat.openai.com") {
+    if (host === "chat.openai.com" || host === "chatgpt.com") {
       const module = await import(getExtensionUrl("src/adapters/chatgpt.js"));
-      adapterKey = "chatgpt";
       return module.createChatGPTAdapter({ onMessage: notifyUsage });
     }
 
     if (host === "claude.ai") {
       const module = await import(getExtensionUrl("src/adapters/claude.js"));
-      adapterKey = "claude";
       return module.createClaudeAdapter({ onMessage: notifyUsage });
     }
 
@@ -73,10 +70,8 @@
     addEventListener("popstate", onRouteChanged);
   }
 
-  initializeAdapter();
+  initializeAdapter().catch((err) => {
+    console.error("[tokenpulse] Failed to initialize adapter:", err);
+  });
   patchHistory();
-
-  setInterval(() => {
-    adapter?.scan?.();
-  }, 2000);
 })();
